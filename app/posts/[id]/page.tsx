@@ -14,6 +14,8 @@ export async function generateStaticParams() {
 }
 
 async function fetchPostWithDelay(id: string, delayMs: number = 5000) {
+  console.log(`Fetching post ${id}`);
+
   await new Promise((resolve) => setTimeout(resolve, delayMs));
 
   const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`);
@@ -35,7 +37,7 @@ export default async function Page({
 
   return (
     <main className="max-w-[800px] p-10 mx-auto">
-      <Link href="/" className="text-blue-400 text-xl">
+      <Link prefetch={false} href="/" className="text-blue-400 text-xl">
         Back
       </Link>
 
