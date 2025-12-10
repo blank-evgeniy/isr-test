@@ -12,15 +12,25 @@ export async function generateStaticParams() {
   return [];
 }
 
+async function fetchPostWithDelay(id: string, delayMs: number = 5000) {
+  await new Promise((resolve) => setTimeout(resolve, delayMs));
+
+  const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`);
+
+  if (!res.ok) {
+    throw new Error("Failed to fetch post");
+  }
+
+  return res.json();
+}
+
 export default async function Page({
   params,
 }: {
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const post: Post = await fetch(
-    `https://jsonplaceholder.typicode.com/posts/${id}`
-  ).then((res) => res.json());
+  const post: Post = await fetchPostWithDelay(id);
 
   return (
     <main className="max-w-[800px] p-10 mx-auto">
