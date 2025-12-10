@@ -7,6 +7,7 @@ interface Post {
 }
 
 export const revalidate = 60 * 5;
+export const dynamicParams = true;
 
 export async function generateStaticParams() {
   return [];
