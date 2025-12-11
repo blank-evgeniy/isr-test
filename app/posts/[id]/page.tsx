@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ClientComponent } from "./client-component";
 
 interface Post {
   id: string;
@@ -37,12 +38,16 @@ export default async function Page({
 
   return (
     <main className="max-w-[800px] p-10 mx-auto">
-      <Link prefetch={false} href="/" className="text-blue-400 text-xl">
+      <Link href="/" className="text-blue-400 text-xl">
         Back
       </Link>
 
       <h1 className="mt-10">{post.title}</h1>
       <p>{post.body}</p>
+
+      <div className="mt-10">
+        <ClientComponent postId={Number(id)} />
+      </div>
     </main>
   );
 }
